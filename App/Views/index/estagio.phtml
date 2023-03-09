@@ -1,0 +1,195 @@
+
+
+    
+          
+          <div class="row d-flex justify-content-center"> <!-- Estagio Header inicio-->
+            <div class="col-lg-11 col-md-12 bg-white main-card">
+              
+              <div class="row d-flex justify-content-center">
+
+                
+
+
+                <div class="col-lg-5 col-md-12"> <!-- Estagio Descrição inicio -->
+                  
+                <div class="jumbotron mt-5 shadow-lg">
+                <h1 class="display-4 d-flex justify-content-center">Estágio Supervisionado</h1>
+                
+                <div class="d-flex justify-content-end">
+                  <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'Administrador'){?>
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#estagio">
+                       <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <?php }?>
+                </div>
+                <hr class="my-4">
+                
+                <?= $this->view->getEstagio['estagio'] ?>
+             
+                </div>
+               
+
+                </div><!-- Estagio Descrição fim -->
+
+                <div class="col-lg-4 col-md-12"> <!-- Estágio Parcerias inicio -->
+                  
+                <div class="jumbotron mt-5 shadow-lg ">
+                <h5 class=" d-flex justify-content-center">Empresas com as quais possuimos parcerias:</h5>
+                <div class="d-flex justify-content-end">
+                  <div class="d-flex justify-content-end">
+                  <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'Administrador'){?>
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#empresa">
+                       <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <?php }?>
+                </div>
+                </div>
+                <hr class="my-4">
+                
+                <?= $this->view->getEstagio['empresa'] ?>
+
+                </div>
+
+                </div> <!-- Estágio Parcerias fim -->
+
+                <div class="col-lg-3 col-md-6 "> <!-- Estagio download inicio -->
+                <div class="jumbotron mt-5 shadow-lg">
+                <div class="d-flex justify-content-center">
+                <img class="img-fluid h-25" src="http://www.etecpedrobadran.com.br/imagem/Img_Acordo.jpg">  
+                </div>
+                
+                <hr class="my-4">
+                 <div class="d-flex justify-content-end">
+                  <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'Administrador'){?>
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#inserirArquivo">
+                       +
+                  </button>
+                  <?php }?>
+                  <div class="d-flex ml-2 justify-content-end">
+                
+                </div>
+                </div>
+                <p class="lead d-flex justify-content-center">
+                Downloads
+
+                </p>
+                <div style="height: 500px; overflow-y: auto;" class="d-flex justify-content-center">
+                <ul class="list-group text-danger">
+                  <!-- Arquivos aqui -->
+                  <?php foreach ($this->view->geteEstagio as $key => $eEstatioValue) {?>
+                    <li>
+                      <a href="arquivos/<?= $eEstatioValue['arquivo']?>" download><?= $eEstatioValue['descricao']?></a>
+                  <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'Administrador'){?>
+                    <a href="excluirArquivoEstagio?id=<?=$eEstatioValue['id']?>">
+                     <i class=" text-danger bi bi-trash3-fill"></i> 
+                    </a>
+                  <?php }?>
+                    </li>
+                  <?php }?>
+                </ul>
+                </div>
+                </div>
+               
+
+                </div> <!-- Estagio download fim -->
+
+              </div>
+               
+            </div>
+               
+
+               
+          </div>  <!-- Estagio Header Fim -->
+            <article class="row d-flex justify-content-center"> <!-- Artigos -->
+              <div class="col-lg-8 col-md-12 bg-white article-main-container rounded shadow">
+
+                
+
+          </article> <!-- Artigos -->
+
+    
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal Estagio -->
+<div class="modal fade" id="estagio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Alterar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="alterarEstagio" method="post">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Descricao:</label>
+          <textarea style="height: 400px;" class="form-control" name="estagio"><?= $this->view->getEstagio['estagio'] ?></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+       <input value="Alterar" class="btn btn-info" type="submit">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Empresa-->
+<div class="modal fade" id="empresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Alterar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="alterarEmpresa" method="post">
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Descricao:</label>
+          <textarea style="height: 400px;" class="form-control" name="empresa"><?= $this->view->getEstagio['empresa'] ?></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+       <input value="Alterar" class="btn btn-info" type="submit">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Arquivos -->
+<div class="modal fade" id="inserirArquivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Inserir um Arquivo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="inserirArquivoEstagio" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+        <div class="form-group">
+         <label>Arquivo:</label>
+         <input class="form-control-file" type="file" name="arquivo">
+        </div>
+         <div class="form-group">
+         <label>Descricao:</label>
+         <input class="form-control-file" type="text" name="descricao">
+        </div>
+      </div>
+      <div class="modal-footer">
+       <input type="hidden" name="estagio_id" value="<?=$this->view->getEstagio['id']?>">
+       <input value="Enviar" class="btn btn-info" type="submit">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+
+
+<div class="usuarioArea-Main ">
+	<div class="container ">
+		<div class="row usuario-row2 ">
+			<!-- Menu inicio -->
+			<div class="col-lg-3 col-md-12 coordenadorMenuColor rounded">
+				<ul class="list-group mt-2 shadow">
+					<li class="list-group-item d-flex justify-content-center ">
+						<a class="list-group-link" href="usuarioMenu">
+							Todos os usuários
+						</a>
+					</li>
+				</ul>
+			</div>
+			<span style="clear: both;"></span>
+			<!-- Menu Fim -->
+			<div class="col-lg-9 col-md-12 coordenadorMenuColor coordenadorHeight rounded ">
+				<div class="row d-flex justify-content-center">
+					<div class="col-11 bg-white rounded shadow-lg mt-2">
+						
+						<!-- Tabela incio -->
+						<form action="/alterarUsuario" method="post">
+					
+
+						 <div class="form-group">
+						 	<label for="nome">Nome</label>
+						 	<input value="<?= $this->view->recuperarUsuario['nome']?>" id="nome" class="form-control" type="text" name="nome" placeholder="Digite seu nome">
+						 </div>
+						 <div class="form-group">
+						 	<label for="email">Email</label>
+						 	<input value="<?= $this->view->recuperarUsuario['email']?>" id="email" class="form-control" type="email" name="email" placeholder="Digite seu email">
+						 </div>
+						 <div class="form-group">
+						 	<label for="senha">Senha</label>
+						 	<input value="<?= $this->view->recuperarUsuario['senha']?>" id="senha" class="form-control" type="password" name="senha" placeholder="Digite sua senha">
+						 </div>
+						
+						<input type="hidden" id='id' name="id" value="<?= $this->view->recuperarUsuario['id']?>">
+						 <button type="submit" class="btn btn-info mb-2">
+						 	Alterar
+						 </button>
+						</form>
+						
+						<span style="clear: both;"></span>
+						
+						<!-- Tabela fim -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<span style="clear: both;"></span>

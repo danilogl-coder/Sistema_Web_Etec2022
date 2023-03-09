@@ -1,0 +1,84 @@
+
+
+<div class="usuarioArea-Main ">
+	<div class="container">
+		<div class="row usuario-row1 ">
+			<!-- Menu inicio -->
+			<div class="col-lg-3 col-md-12 coordenadorMenuColor rounded">
+				<ul class="list-group mt-2 shadow">
+					<li class="list-group-item d-flex justify-content-center active">
+						<a class="list-group-link text-white" href="cursoMenu">
+							Todos os Cursos
+						</a>
+					</li>
+					<li class="list-group-item d-flex justify-content-center">
+						<a class="list-group-link" href="formCurso">
+							Cadastrar um Curso
+						</a>
+					</li>
+				</ul>
+			</div>
+			<span style="clear: both;"></span>
+			<!-- Menu Fim -->
+			<div class="col-lg-9 col-md-12 coordenadorMenuColor  rounded ">
+				<div class="row d-flex justify-content-center">
+					<div class="coordenadorHeight col-lg-11 bg-white rounded shadow-lg mt-2">
+						
+						<!-- Tabela incio -->
+					
+						<table class="table">
+						  <thead class="thead">
+						    <tr>
+						      <th scope="col">id</th>
+						      <th scope="col">Coordenadores</th>
+						      <th scope="col">titulo</th>
+						      <th scope="col">logotipo</th>
+							  <?php if($_SESSION['tipo'] == 'Administrador'){?>	      
+								<th scope="col">crud</th>
+							  <?php }?>
+						    </tr>
+						  </thead>
+						  	<tbody>
+					
+							<?php foreach ($this->view->getAllCursos as $key => $value) {?>
+							
+							<tr>
+							<td><?= $value['id']?></td> <!-- ID -->
+							<td>
+							<?php if($value['usuario_id'] != ''){?>
+							<?=$value['nome']?>	
+
+							<?php }?>
+							</td><!-- Coord -->
+							<td><?= $value['titulo']?></td><!-- Titulo -->
+							<td><img style="width:80px; height:80px; " src="arquivos/<?= $value['logotipo']?>"></td><!-- Logotipo -->
+							<?php if($_SESSION['tipo'] == 'Administrador'){?>
+							<td><!-- Crud -->
+
+							<div class="d-flex d-inline">
+							<a href="recuperarCurso?metodo=Alterar&id=<?= $value['id']?>"><i class="bi bi-pencil-square"></i></a> <!-- Alter -->
+							<a href="excluirCurso?id=<?= $value['id']?>"><i class="text-danger bi bi-trash-fill"></i></a> <!-- Delete -->
+							</div>
+							</td>
+							<?php }?>
+							
+							</tr>
+							
+							<?php }?>
+						 
+						
+
+						
+						   
+						  </tbody>
+						</table>
+						<span style="clear: both;"></span>
+						
+						<!-- Tabela fim -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<span style="clear: both;"></span>

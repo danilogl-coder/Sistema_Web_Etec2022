@@ -1,0 +1,74 @@
+<?php 
+  $_SESSION['imagem'] = $this->view->getVest['imagem'];
+?>
+
+
+          
+            <article class="row d-flex justify-content-center main-card"> <!-- Artigos Cursos Inicio -->
+             
+              <div id="" class="col-9 bg-white rounded shadow "> <!-- Vestibulinho inicio -->
+                <div class="d-flex justify-content-end mt-5">
+                <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'Administrador'){?>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vestibulinho">
+                     <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <?php }?>
+                 </div>
+                <h1 class="d-flex justify-content-center">
+                  Vestibulinho
+                </h1>
+                <div class="d-flex justify-content-center">
+                  <a href="https://www.vestibulinhoetec.com.br/home/">
+                  <img class="mt-5 img-fluid" src="arquivos/<?= $this->view->getVest['imagem']?>">
+                  </a>
+                </div>
+
+
+               
+              </div> <!-- Vestibulinho fim -->
+
+             
+
+          </article> <!-- Artigos Cursos Fim -->
+
+    
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="vestibulinho" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Alterar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="alterarVestibulinho" method="post" enctype="multipart/form-data">
+      <div class="modal-body">
+        <input type="file" name="imagem">
+      </div>
+      <div class="modal-footer">
+        <div class="form-group">
+          <input class="btn btn-info" type="submit" value="Alterar" >
+        </div>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

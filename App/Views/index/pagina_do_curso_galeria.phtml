@@ -1,0 +1,201 @@
+
+
+          
+            <article class="row d-flex justify-content-center main-card"> <!-- Artigos Cursos Inicio -->
+             
+              <div id="postCurso" class="col-9 bg-white  rounded shadow"> <!-- Curso Administracao inicio -->
+
+                <div class="jumbotron mt-5">
+                <h1 class="display-4 d-flex justify-content-center">
+                  <?= $this->view->getCurso['titulo']?>
+                </h1>
+                <div class="d-flex justify-content-center">
+                   <img class="img-fluid h-25" src="arquivos/<?=$this->view->getCurso['capa']?>">
+                </div>
+               
+                
+                <hr class="my-4">
+                <p class="lead">
+                <?= $this->view->getCurso['descricao']?>
+                </p>
+                </div>
+                <div class="d-flex justify-content-end">
+
+                  <a onclick="$('#formCurso<?= $this->view->getCurso['id']?>').submit()"> <!-- Pub -->
+                   <i class="h1 mr-3 bi bi-window-fullscreen"></i>
+                  </a>
+
+                  <form action="paginaCurso?link=cursos&offset=0&qtdPg=5" method="post" id="formCurso<?= $this->view->getCurso['id']?>">
+                    <input type="hidden" name="id" value='<?= $this->view->getCurso['id']?>'>
+                    
+                  </form>
+
+                  
+                  <a onclick="$('#cursoForm<?= $this->view->getCurso['id'] ?>').submit()"> <!-- Files -->
+                    <i class="mr-3 h1 bi bi-file-earmark-arrow-down-fill"></i>
+                  </a>
+
+                  <form action="cursoArquivos?offset=0&qtdPg=6" method="post" id="cursoForm<?= $this->view->getCurso['id'] ?>">
+                    <input type="hidden" name="curso_id" value="<?= $this->view->getCurso['id'] ?>">
+                    <input type="hidden" name="usuario_id" value="<?= $this->view->getCurso['usuario_id'] ?>">
+                  </form>
+
+                  <a href=""> <!-- Galeria -->
+                      <i class="h1 bi bi-images"></i>
+                  </a>
+
+                </div>
+                </div> <!-- Curso Administracao fim -->
+
+          <?php if(isset($_SESSION['tipo'])){?>
+           <?php if($this->view->getCurso['usuario_id'] == $_SESSION['id'] || $_SESSION['tipo'] == 'Administrador'){?>
+              <div class="mt-5 col-lg-9 col-md-12 bg-white rounded shadow">
+                <form action="inserirCursoGaleria" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label>Legenda</label>
+                    <input class="form-control" type="text" name="legenda">
+                  </div>
+                  <div class="form-group">
+                    <label>Imagem</label>
+                    <input class="form-control-file" type="file" name="imagem">
+                  </div>
+                  <div class="form-group">
+                    <input type="hidden" name="curso_id" value="<?= $this->view->getCurso['id']?>">
+                    <input type="hidden" name="usuario_id" value="<?= $this->view->getCurso['usuario_id']?>">
+                    <input type="submit" class="btn btn-info">
+                  </div>
+
+                </form>
+              </div>
+            
+            <?php }?>
+            <?php }?>  
+
+              <div class="mt-5 col-lg-9 col-md-12 bg-white rounded shadow">
+                
+                <div class="p-5">
+                  
+
+                 <div class="card-columns"> <!-- Columns inicio -->
+
+                   <?php foreach ($this->view->getGaleria['regs'] as $key => $valueGaleria) {?>
+                     <div class="card">
+                      <div class="card-header">
+                      
+                        <div class="row">
+                          <div class="col-10">
+                           <?= $valueGaleria['data_inclusao']?>
+                          </div>
+                          <div class="col-2">
+                              <?php if(isset($_SESSION['tipo'])){?>
+                              <?php if($this->view->getCurso['usuario_id'] == $_SESSION['id'] || $_SESSION['tipo'] == 'Administrador'){?>
+                            <a href="excluirCursoGaleria?id=<?= $valueGaleria['id']?>"><!-- Excluir -->
+                              <i class="h5 text-danger bi bi-trash3-fill"></i>
+                            </a> <!-- Excluir -->
+                              <?php }?>
+                              <?php }?>
+                          </div>
+                        </div>
+                      </div>
+                      <img onclick="$('#button<?=$valueGaleria['id']?>').trigger('click')" class="card-img-top" src="arquivos/<?= $valueGaleria['imagem']?>">
+                      <div class="card-footer">
+                        <small>
+                          <?= $valueGaleria['legenda']?>
+                        </small>
+                      </div>
+                    </div>
+
+                    <div class="modal fade" id="galeria<?=$valueGaleria['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                      <div class="modal-content col-12">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">
+                         <?=$valueGaleria['data_inclusao']?>
+                        </h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="d-flex justify-content-center">
+                             <img style="width:100%;" src="arquivos/<?=$valueGaleria['imagem']?>">
+                          </div>
+                        </div>
+                        <div class="modal-header">
+                           <?=$valueGaleria['legenda']?>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                    <button id="button<?=$valueGaleria['id']?>" type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#galeria<?=$valueGaleria['id']?>">
+                    Launch demo modal
+                    </button>
+
+                    
+                   <?php }?> 
+                 </div> <!-- Columns fim  -->
+
+
+                </div>
+
+                <div>
+                <ul class="pagination d-flex justify-content-center">
+              
+                <?php 
+                  $qtdPg = 6;
+                  $pages = $this->view->getGaleria['qt']/$qtdPg;
+                  $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+                  $atual = ($offset/$qtdPg);
+                  $min = 0;
+                  $max = $pages;
+
+
+                  if($atual > 6 && $pages > 12)
+                  {
+                    $min = $atual - 6;
+                  }
+
+                ?>
+
+
+                  <li class="page-item">
+                    <a class="page-link" href="<?php echo $offset == 0 ?  "#!" : "?offset=".(($atual-1)*$qtdPg)."&qtdPg=".$qtdPg;?>" aria-label="Previous" > 
+                      
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+
+                  </li>
+                  
+
+                  <?php 
+             
+                  for ($i=$min; $i < $max; $i++) { ?>
+                   
+                   <li class="page-item"><a class="page-link" href="?offset=<?= ($i*$qtdPg)?>&qtdPg=<?=$qtdPg?>"><?=($i+1)?></a></li>
+                                
+                   <?php } ?>                
+                
+                  
+                  <li class="page-item">
+                    <a class="page-link" href="<?php echo $atual > $pages ? "#!" : "?offset=".(($atual+1)*$qtdPg)."&qtdPg=".$qtdPg;?>" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+
+
+              </ul>
+                </div>
+              </div>
+
+             
+
+          </article> <!-- Artigos Cursos Fim -->
+
+
+          <!-- Button trigger modal -->
+        
+          <!-- Modal -->
+          

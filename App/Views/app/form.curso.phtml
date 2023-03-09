@@ -1,0 +1,86 @@
+
+
+<div class="usuarioArea-Main ">
+	<div class="container ">
+		<div class="row usuario-row2 ">
+			<!-- Menu inicio -->
+			<div class="col-lg-3 col-md-12 coordenadorMenuColor rounded">
+				<ul class="list-group mt-2 shadow">
+					<li class="list-group-item d-flex justify-content-center ">
+						<a class="list-group-link" href="cursoMenu">
+							Todos os Cursos
+						</a>
+					</li>
+					<li class="active list-group-item d-flex justify-content-center ">
+						<a class="list-group-link text-white" href="formCurso">
+	<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){echo"Alterar";}else{echo"Cadastrar um Curso";}?>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<span style="clear: both;"></span>
+			<!-- Menu Fim -->
+			<div class="col-lg-9 col-md-12 coordenadorMenuColor coordenadorHeight rounded ">
+				<div class="row d-flex justify-content-center">
+					<div class="col-11 bg-white rounded shadow-lg mt-2">
+						
+						<!-- Tabela incio -->
+						<form enctype="multipart/form-data" action="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){ echo "alterarCurso";}else{ echo "cadastrarCurso";}?>" method="post">
+					
+
+						 <div class="form-group">
+						 	<label for="titulo">Titulo</label>
+						 	<input value="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar') {?><?=$this->view->getCurso['titulo']?><?php }?>" id="titulo" class="form-control" type="text" name="titulo" placeholder="Digite seu nome">
+						 </div>
+
+						<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){?>
+					 	<div class="form-group mt-4 mb-3">
+					 		<label>Coordenador:</label>
+							 <select name="usuario_id">
+							 	<option value="0">
+							 	-----------------////-----------------
+							    </option>
+							 	<?php foreach ($this->view->getAllUsuarios as $key => $userValue) {?>
+
+							 	<?php if($userValue['id'] != $userValue['usuario_id']){?>	
+							 		<option value="<?=$userValue['id']?>">
+							 			<?= $userValue['nome']?>
+							 		</option>
+							 	<?php }?>
+							 	 	
+						 	    <?php }?>
+							 </select>
+
+						</div>
+						<?php }?>
+						 <div class="form-group">
+						 	<label for="logotipo">Logotipo</label>
+						 	<input value="" id="logotipo" class="form-control-file" type="file" name="logotipo" placeholder="Digite seu email">
+						 </div>
+						 <div class="form-group">
+						 	<label for="capa">Capa</label>
+						 	<input value="" id="capa" class="form-control-file" type="file" name="capa" placeholder="Digite sua senha">
+						 </div>
+						 <div class="form-group">
+						 	<label for="descricao">Descrição</label>
+						 	
+						 	<textarea id="descricao" class="form-control" name="descricao"><?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar') {?><?=$this->view->getCurso['descricao']?><?php }?>
+						 	</textarea>
+						 </div>
+						
+						 <input type="hidden" id='id' name="id" value="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar') {?> <?= $this->view->getCurso['id']?> <?php }?>">
+						 <button type="submit" class="btn btn-info mb-2">
+						 	<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){echo"Alterar";}else{echo"Cadastrar";}?>
+						 </button>
+						</form>
+						
+						<span style="clear: both;"></span>
+						
+						<!-- Tabela fim -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<span style="clear: both;"></span>

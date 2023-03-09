@@ -1,0 +1,212 @@
+
+        <script type="text/javascript">
+       
+        </script>
+    
+
+
+
+  
+          
+          <div class="row d-flex justify-content-center"> <!-- Card inicio -->
+            <div class="col-lg-8 col-md-12">
+              
+              
+               <div class="card-deck ">
+                <div class="card main-card shadow ">
+
+                  <div onclick='window.location.href="cursos?link=cursos"' class="card-header main-card-header1">
+                    <h4 class="text-white">Cursos <span><i class="bi bi-book"></i></span></h4>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Veja Já!</h5>
+                    <p class="card-text">
+                      Oferecemos cursos Técnicos Gratuitos e de Qualidade para sua Carreira Profissional.
+                    </p>
+                    <hr>
+                    <a href="cursos?link=cursos">
+                     <button class="btn btn-sm btn-outline-danger">
+                      ir para Cursos<span class="ml-1"><i class="bi bi-caret-right-fill"></i></span>
+                    </button>
+                    </a>
+                   
+                  </div>
+                  
+                  </div>
+
+                  <div class="card main-card shadow">
+                  <div onclick='window.location.href="vestibulinho?link=vestibulinho"' class="card-header main-card-header1">
+                    <h4 class="text-white">Vestibulinho <span><i class="bi bi-journal-bookmark-fill"></i></span></h4>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Inscreva-se já!</h5>
+                   
+                    <p>
+                    Tenha em mãos o CPF do candidato, que é obrigatório para realizar a inscrição.
+                    </p>
+                    <hr>
+                    <a href="vestibulinho?link=vestibulinho">
+                    <button class="btn btn-sm btn-outline-danger">
+                      ir para Vestibulinho<span class="ml-1"><i class="bi bi-caret-right-fill"></i></span>
+                    </button>  
+                    </a>
+                    
+                     
+                  </div>
+               
+                  </div>
+
+                  <div class="card main-card shadow d-flex  ">
+                  <div onclick="window.location.href='estagio?link=estagio'" class="card-header main-card-header2">
+                    <h4 class="text-white">Estágios <span><i class="bi bi-bank"></i></span></h4>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                    Estágio Supervisionado
+                    </h5>
+                    <p class="card-text">
+                    O estágio supervisionado pode ser realizado por qualquer aluno regularmente matriculado em quaisquer um dos cursos técnicos da Etec Pedro Badran.
+                    </p>
+                    <hr>
+                    <a href="estagio?link=estagio">
+                    <button class="btn btn-sm btn-outline-danger">
+                      ir para Estágio<span class="ml-1"><i class="bi bi-caret-right-fill"></i></span>
+                    </button>
+                    </a>
+                     
+                  </div>
+                 
+                </div>
+              </div>
+
+            </div>
+          </div> <!-- Card Fim -->
+
+            <article class="row d-flex justify-content-center"> <!-- Artigos -->
+              <div class="col-lg-8 col-md-12 bg-white article-main-container rounded shadow">
+
+               <div class="card-columns mt-5"> <!-- Card inicio -->
+                <?php foreach($this->view->getAllPubs['regs'] as $key => $valuePub) {?>
+                
+                  <div class="card shadow">
+                   <div class="card-header bg-dark text-white">
+                    <h4> <?= $valuePub['titulo'] ?> </h4>
+                    </div>
+                    <img class="card-img " 
+                    src="arquivos/<?= $valuePub['logotipo']?>">
+                    <div class="card-body">
+                    <button onclick=" $('#formPub<?= $valuePub['id'] ?>').submit()" class="btn btn-sm btn-outline-danger">
+                    ir para o Curso<span class="ml-1"><i class="bi bi-caret-right-fill"></i></span>
+                    </button>
+                    <hr>
+                    <small class="d-flex justify-content-end"><?= $valuePub['data_inclusao'] ?></small>
+                  </div>
+
+                  <form action="/paginaCurso?link=cursos&offset=0&qtdPg=5" method="post" id="formPub<?= $valuePub['id'] ?>">
+                    <div class="form-group">
+                      <input type="hidden" name="id" value="<?= $valuePub['curso_id']?>">
+                    </div>
+                  </form>
+                </div>
+               <?php }?>
+                
+
+             
+               </div> <!-- Paginação fim -->
+               
+
+              <div>
+                  <ul class="pagination d-flex justify-content-center"> <!-- Paginação Inicio -->
+              
+              <?php 
+                $qtdPg = 6;
+                $pages = $this->view->getAllPubs['qt']/$qtdPg;
+                $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+                $atual = ($offset/$qtdPg);
+                $min = 0;
+                $max = $pages;
+
+                
+
+                if($atual > 5 && $pages > 10)
+                {
+                  $min = $atual - 5;
+                }
+
+              ?>
+
+
+                <li class="page-item">
+                  <a class="page-link" href="<?php echo $offset == 0 ?  "#!" : "?offset=".(($atual-1)*$qtdPg)."&qtdPg=".$qtdPg;?>" aria-label="Previous" > 
+                    
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+
+                </li>
+                
+
+                <?php 
+           
+                for ($i=$min; $i < $max; $i++) { ?>
+                 
+                 <li class="page-item"><a class="page-link" href="?offset=<?= ($i*$qtdPg)?>&qtdPg=<?=$qtdPg?>"><?=($i+1)?></a></li>
+                              
+                 <?php } ?>                
+              
+                
+                <li class="page-item">
+                  <a class="page-link" href="<?php echo $atual > $max ? "#!" : "?offset=".(($atual+1)*$qtdPg)."&qtdPg=".$qtdPg;?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+
+
+              </ul>
+               </div>
+              
+
+
+
+                
+
+                 
+
+
+
+                 
+
+            </div><!-- Card Fim -->
+
+          </article> <!-- Artigos -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

@@ -1,0 +1,57 @@
+
+
+          
+            <article class="row d-flex justify-content-center main-card"> <!-- Artigos Cursos Inicio -->
+             
+              <div id="postCurso" class="col-9 bg-white  rounded shadow"> <!-- Curso incio -->
+
+
+                <div class="card-columns">
+                <?php foreach ($this->view->getAllCursos as $key => $valueCurso) {?>
+                    <div class="card shadow-lg mt-5 mb-5 ">
+                    <a onclick="$('#formCurso<?= $valueCurso['id']?>').submit()">
+                       <img class="card-img card-curso" src="arquivos/<?=$valueCurso['logotipo']?>">
+                    
+                   
+                    </a>
+                    <h4 class="card-title d-flex justify-content-center">
+                    <?= $valueCurso['titulo']?>
+                    </h4>
+                    </div>
+
+                    <form id="formCurso<?= $valueCurso['id']?>" action="paginaCurso?link=cursos&offset=0&qtdPg=5" method="post">
+                     <input type="hidden" name="id" value="<?= $valueCurso['id']?>">
+                      
+                    </form>
+                 <?php }?>
+                  
+                  </div>
+                
+              
+              
+              </div> <!-- Curso fim -->
+
+             
+
+          </article> <!-- Artigos Cursos Fim -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

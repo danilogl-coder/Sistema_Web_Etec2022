@@ -1,0 +1,141 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <!-- Style/CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- JQuery-->
+    <link rel="stylesheet" type="text/css" href="js/jquery-3.6.0.min.js">
+    <!-- Javascript Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!-- Icon Page-->
+    <link rel="icon" href="img/iconLogo.png">
+
+
+ 
+    <title>Home page</title>
+  </head>
+  <body>
+    
+
+    <header class="container-fluid ">  <!-- Incio do Cabeçario -->
+      <div class="row">
+        <div class="col-12 bg-dark  fixed-top">
+          
+          <nav class="navbar navbar-expand-lg navbar-dark "> <!-- Inicio do Navbar -->
+            <!-- Logo -->
+            <div class="container">
+            <a class="navbar-brand" href="/?link=home&offset=0&qtdPg=6"><img class="logo" src="img/logo_badran.png"></a>
+            <!-- Hamburge Button -->
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navegação -->
+            <div class="collapse navbar-collapse" id="navbar">
+              <ul class="navbar-nav ml-auto">
+                <li  id="<?php if(isset($_GET['link']) && $_GET['link'] == 'home'){echo "Home";}else {echo "";}?>" class="nav-item">
+                  <a class="nav-link" href="/?link=home&offset=0&qtdPg=6">Home</a>
+                </li>
+              
+                <li id="<?php if(isset($_GET['link']) && $_GET['link'] == 'cursos'){echo "Cursos";}else {echo "";}?>" class="nav-item">
+                  <a  class="nav-link"href="cursos?link=cursos">Cursos</a>
+                </li>
+                <li id="<?php if(isset($_GET['link']) && $_GET['link'] == 'vestibulinho'){echo "Vestibulinho";}else {echo "";}?>" class="nav-item">
+                  <a  class="nav-link"href="vestibulinho?link=vestibulinho">Vestibulinho</a>
+                </li>
+            
+                <li id="<?php if(isset($_GET['link']) && $_GET['link'] == 'estagio'){echo "Estagio";}else {echo "";}?>" class="nav-item">
+                  <a  class="nav-link"href="estagio?link=estagio">Estágio</a>
+                </li>
+
+
+                 <li id="area_do_aluno" class="nav-item">
+                  <a target="_blank" class="nav-link"href="http://etec.sp.gov.br/view/Default.aspx?link=8">Área do Aluno</a>
+                </li>
+
+                <li>
+                  <div class="dropdown">
+                  <a class=" btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Quem Somos
+                  </a>
+                  <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item text-white bg-secondary" href="historia">
+                    Nossa História
+                    </a>
+                    <a  class="dropdown-item text-white bg-secondary" href="estrutura">
+                    Nossa Estrutura
+                    </a>
+                    <a  class="dropdown-item text-white bg-secondary" href="contato">
+                    Nosso Contato
+                   </a>
+                  </div>
+                  </div>
+
+                </li>
+
+                <?php if(!isset($_SESSION['tipo'])){?>
+                <li id="<?php if(isset($_GET['link']) && $_GET['link'] == 'login'){echo "Login";}else {echo "";}?>" class="nav-item">
+                  <a  class="nav-link"href="login?link=login">
+                    Entrar
+                  </a>
+                </li>
+                <?php } else if(isset($_SESSION['tipo'])){?>
+                  <div class="dropdown">
+                  <button class="btn btn-outline-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                  </button>
+                  <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                    <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'Administrador' || $_SESSION['tipo'] == 'Coordenador'){?>
+                    <a class="dropdown-item bg-secondary text-white" href="/areaAdm">AreaAdm</a>
+                    <?php }?>
+                    <a class="dropdown-item bg-secondary text-white" href="/sair">Sair</a>
+                  </div>
+                  </div>
+                <?php }?>
+              </ul>
+            </div>
+            </div>
+
+          </nav> <!-- Fim do Navbar -->
+
+        </div>
+      </div>
+    </header> <!-- Fim do Cabeçario -->
+
+
+
+    <div class="container-fluid main-container"> <!-- Container Principal Incio -->
+      <div class="row">
+        <div class="col-12  background-color-main">
+          
+
+         <!-- Conteudo principal Inicio-->
+         <?= $this->content() ?>
+         <!-- Conteudo principal Fim-->
+
+             
+        </div>
+      </div>
+    </div> <!-- Container Principal Fim -->
+
+    <footer style="position: fixed bottom;" class="container-fluid bg-white">
+      <div class="row">
+        <div class="col-12 bg-dark d-flex justify-content-center p-3">
+         <p class="text-white">
+           Todos os direitos reservados | 2022 | Site desenvolvido pelo Curso de Informatica.
+         </p>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

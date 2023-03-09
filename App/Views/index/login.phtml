@@ -1,0 +1,54 @@
+
+
+            <div class="container-login">
+            <article class="row d-flex justify-content-center main-card"> <!-- Artigos Historia Inicio -->
+              <div class="col-lg-10 col-md-12 bg-dark  rounded shadow">
+
+               <div class="bg-dark">
+                 <h3 class="text-white p-2">Seja Bem-vindo(a)!</h3>
+                 <hr>
+                 <div class="row">
+                   <div class="col-lg-6 col-md-12 bg-white">
+                   <p class="lead mt-2">
+                      Aqui você poderá encontrar informações referentes ao seu perfil, para isto basta efetuar o login.
+                   </p>
+                   
+                   <hr>
+                   <p class="lead">
+                      Caso você ainda não tenha uma conta cadastrada, basta clicar em Cadastrar-se.
+                   </p>
+                   <button onclick="window.location.href = 'cadastrar'" class="btn btn-outline-danger">
+                     Cadastrar-se
+                   </button>
+                   <?php if($this->view->successCadastro == true){?>
+                   <h4 class="mt-5 text-form text-success">Você foi cadastrado com sucesso !</h4>
+                   <?php }?>
+                   <?php if(isset($_GET['erro']) && $_GET['erro'] == 'erro'){?>
+                   <h4 class="mt-5 text-form text-danger">Erro no login, esse usuário não foi cadastrado!</h4>
+                   <?php }?>
+                   </div>
+                  
+                   <div class="col-lg-6 col-md-12 bg-white">
+
+                    <form action="autenticar" method="post" class="mt-5 mb-5">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">E-mail</label>
+                      <input name="email" placeholder="user@gmail.com" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <small id="emailHelp" class="form-text text-muted">Não compartilhe seu e-mail com ninguém.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Senha</label>
+                      <input name ="senha" type="password" class="form-control" id="">
+                    </div>
+                    <button type="submit" class="btn btn-danger">Entrar</button>
+                  </form>
+
+                   </div>
+                 </div>
+                 <br>
+               </div>
+               <br>
+                 
+
+          </article> <!-- Artigos Historia Fim -->
+        </div>

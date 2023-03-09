@@ -1,0 +1,186 @@
+
+
+          
+            <article class="row d-flex justify-content-center main-card"> <!-- Artigos Cursos Inicio -->
+             
+              <div id="postCurso" class="col-9 bg-white  rounded shadow"> <!-- Curso Administracao inicio -->
+
+                <div class="jumbotron mt-5">
+                <h1 class="display-4 d-flex justify-content-center">
+                  <?= $this->view->getCurso['titulo']?>
+                </h1>
+                <div class="d-flex justify-content-center">
+                   <img class="img-fluid h-25" src="arquivos/<?=$this->view->getCurso['capa']?>">
+                </div>
+               
+                
+                <hr class="my-4">
+                <p class="lead">
+                <?= $this->view->getCurso['descricao']?>
+                </p>
+                </div>
+                <div class="d-flex justify-content-end">
+
+                  <a onclick="$('#formCurso<?= $this->view->getCurso['id']?>').submit()"> <!-- Files -->
+                   <i class="h1 mr-3 bi bi-window-fullscreen"></i>
+                  </a>
+
+                  <form action="paginaCurso?link=cursos&offset=0&qtdPg=5" method="post" id="formCurso<?= $this->view->getCurso['id']?>">
+                    <input type="hidden" name="id" value='<?= $this->view->getCurso['id']?>'>
+                    
+                  </form>
+
+                  <a href=""> <!-- Files -->
+                    <i class="mr-3 h1 bi bi-file-earmark-arrow-down-fill"></i>
+                  </a>
+
+                  <a onclick="$('#galeriaForm').submit()"> <!-- Galeria -->
+                      <i class="h1 bi bi-images"></i>
+                  </a>
+                  <form action="cursoGaleria?offset=0&qtdPg=6" method="post" id="galeriaForm">
+                    <input type="hidden" name="curso_id" value="<?=  $this->view->getCurso['id'] ?>">
+                    <input type="hidden" name="usuario_id" value="<?= $this->view->getCurso['usuario_id'] ?>">
+                  </form>
+
+                </div>
+                </div> <!-- Curso Administracao fim -->
+
+              <?php if(isset($_SESSION['tipo'])){?>
+                <?php if($this->view->getCurso['usuario_id'] == $_SESSION['id'] || $_SESSION['tipo'] == 'Administrador'){?>
+              <div class="mt-5 col-lg-9 col-md-12 bg-white rounded shadow">
+               <!-- Coloque o formulario aqui -->
+               <form action="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){echo "alterarArquivo?offset=0&qtdPg=6";} else { echo "inserirArquivo?offset=0&qtdPg=6";}?>" method="post"  enctype="multipart/form-data">
+                 <div class="form-group">
+                   <label>Descricao</label>
+                   <input class="form-control"
+                   value="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){echo $this->view->getFileId['descricao'];}?>" 
+                    type="text" name="descricao">
+                 </div>
+                 <div class="form-group">
+                   <label>Arquivo</label>
+                   <input class="form-control-file" type="file" name="arquivo">
+                 </div>
+                 <div class="form-group">
+                  <input type="hidden" name="id" value="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){ echo $this->view->getFileId['id']; }?>">
+                  <input type="hidden" name="curso_id" value="<?= $this->view->getCurso['id']?>">
+                  <input type="hidden" name="usuario_id" value="<?= $this->view->getCurso['usuario_id']?>">
+                   <input value="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){echo "Alterar";} else{echo "Enviar";} ?>" class="btn btn-info btn-lg" type="submit">
+                 </div>
+               </form>
+              </div>
+            
+            <?php }?>
+            <?php }?>  
+
+              <div class="mt-5 col-lg-9 col-md-12 bg-white rounded shadow">
+                
+                <div class="p-5">
+                  
+                  <!-- Coloque os arquivos aqui -->
+
+
+
+
+                  <div class="card-columns"> <!-- Columns inicio -->
+
+                  <?php foreach ($this->view->getFile['regs'] as $key => $valueFile) {?>
+                  <div class="card">
+                   <?php if(isset($_SESSION['tipo'])){?>
+                   <?php if($this->view->getCurso['usuario_id'] == $_SESSION['id'] || $_SESSION['tipo'] == 'Administrador'){?>
+                    <div class="card-header d-flex justify-content-end">
+                      <a href="cursoArquivos?offset=0&qtdPg=6&metodo=Alterar&id=<?=$valueFile['id']?>"> <!-- alterar -->
+                        <i class="h5 bi bi-pencil-square"></i>
+                      </a>
+                      <a href="excluirArquivo?offset=0&qtdPg=6&id=<?= $valueFile['id'] ?>"> <!-- excluir -->
+                        <i class="h5 ml-2 text-danger bi bi-trash3-fill"></i>
+                      </a>
+
+                    </div>
+                     <?php }?>
+                     <?php }?>  
+                    <div class="d-flex justify-content-center mt-2">
+                      <a href="arquivos/<?= $valueFile['arquivo']?>" download>
+                        <img style="width: 80px;" class="card-img-top" src="img/fileIcon.png" alt="Card image cap">
+                      </a>
+                    </div>
+                    
+                    <div class="card-body">
+                      <p class="card-text">
+                      <?= $valueFile['descricao'] ?>
+                      </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-end">
+                      <?= $valueFile['data_inclusao'] ?>
+                    </div>
+                  </div>
+                 <?php }?>
+
+       
+
+                 </div> <!-- Columns fim  -->
+
+
+                 <div>
+                        <ul class="pagination d-flex justify-content-center"> <!-- Paginação inicio -->
+              
+              <?php 
+                $qtdPg = 6;
+                $pages = $this->view->getFile['qt']/$qtdPg;
+                $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+                $atual = ($offset/$qtdPg);
+                $min = 0;
+                $max = $pages;
+
+
+                if($atual > 5 && $pages > 10)
+                {
+                  $min = $atual - 5;
+                }
+
+              ?>
+
+
+                <li class="page-item">
+                  <a class="page-link" href="<?php echo $offset == 0 ?  "#!" : "?offset=".(($atual-1)*$qtdPg)."&qtdPg=".$qtdPg;?>" aria-label="Previous" > 
+                    
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+
+                </li>
+                
+
+                <?php 
+           
+                for ($i=$min; $i < $max; $i++) { ?>
+                 
+                 <li class="page-item"><a class="page-link" href="?offset=<?= ($i*$qtdPg)?>&qtdPg=<?=$qtdPg?>"><?=($i+1)?></a></li>
+                              
+                 <?php } ?>                
+              
+                
+                <li class="page-item">
+                  <a class="page-link" href="<?php echo $atual > $max ? "#!" : "?offset=".(($atual+1)*$qtdPg)."&qtdPg=".$qtdPg;?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+
+
+              </ul> <!-- Paginação fim -->
+                 </div>
+
+
+
+
+
+
+                </div>
+              </div>
+
+             
+
+           
+             
+
+          </article> <!-- Artigos Cursos Fim -->

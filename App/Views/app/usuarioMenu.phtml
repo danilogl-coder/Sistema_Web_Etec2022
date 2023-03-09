@@ -1,0 +1,113 @@
+<?php 
+	
+	
+?>
+<div class="usuarioArea-Main ">
+	<div class="container">
+		<div class="row usuario-row1 ">
+			<!-- Menu inicio -->
+			<div class="col-lg-3 col-md-12 coordenadorMenuColor rounded">
+				<ul class="list-group mt-2 shadow">
+					<li class="list-group-item d-flex justify-content-center active">
+						<a class="list-group-link text-white" href="usuarioMenu">
+							Todos os usuários
+						</a>
+					</li>
+				</ul>
+			</div>
+			<span style="clear: both;"></span>
+			<!-- Menu Fim -->
+			<div class="col-lg-9 col-md-12 coordenadorMenuColor coordenadorHeight rounded ">
+				<div class="row d-flex justify-content-center">
+					<div class="col-11 bg-white rounded shadow-lg mt-2">
+						
+						<!-- Tabela incio -->
+						
+						<table class="table ">
+						  <thead class="thead">
+						    <tr>
+						      <th scope="col">id</th>
+						      <th scope="col">nome</th>
+						      <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'Administrador') {?>
+						      <th scope="col">USER</th>
+						      <th scope="col">ADM</th>
+						      <th scope="col">COORD</th>
+						      <th scope="col">crud</th>
+						      <?php }?>
+						    </tr>
+						  </thead>
+						  	<tbody>
+						<?php foreach ($this->view->usuarios as $key => $usuarioValue) {?>
+							<?php if($usuarioValue->id != $usuarioValue->usuario_id){?>
+							<tr>
+								<td> <!-- id -->
+								<?=  $usuarioValue->id ?>
+								</td>
+								<td> <!-- nome -->
+								<?=  $usuarioValue->nome?>
+								</td>
+							<?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'Administrador'){?>
+								<!-- Cargo Inicio -->
+
+								<form action="index" method="post">
+								<td><!-- Usuario -->
+								<input onclick="window.location.href  = `alterarCargoUsuario?id=<?=$usuarioValue->id?>&tipo=Usuário`;
+								"<?php if($usuarioValue->tipo == 'Usuário'){ echo 'checked';}?>
+								 value="<?=$usuarioValue->tipo?>" class="ml-3" type="radio" name="tipo1" id="tipoUser<?=$usuarioValue->id?>">
+								
+								</td>
+								<td> <!-- Administrador -->
+								<input onclick="window.location.href  = `alterarCargoUsuario?id=<?=$usuarioValue->id?>&tipo=Administrador`;
+								"<?php if($usuarioValue->tipo == 'Administrador'){ echo 'checked';}?>
+								class="ml-3"  name="tipo1" type="radio" id="tipoAdm<?=$usuarioValue->id?>" >
+
+								</td>
+
+								<td> <!-- Coordenador -->
+								<input onclick="window.location.href  = `alterarCargoUsuario?id=<?=$usuarioValue->id?>&tipo=Coordenador`;
+								"<?php if($usuarioValue->tipo == 'Coordenador'){ echo 'checked';}?> 
+								class="ml-3"   name="tipo1" type="radio" id="tipoCoord<?=$usuarioValue->id?>" >
+								</td>
+
+							   </form>
+								<!-- Cargo Fim -->
+
+
+
+								<td> <!-- crud -->
+								<ul class="list-group  ">
+									<div class="d-flex d-inline">
+										
+										<a href="formUsuario?id=<?=$usuarioValue->id?>"> <!-- Alterar -->
+										<i class="bi bi-pencil-square"></i>
+									</a>
+									<a href="excluirUsuario?id=<?=$usuarioValue->id?>"> <!-- Excluir -->
+										<i class="text-danger bi bi-trash-fill"></i>
+
+									</a>
+									</div>
+									
+								 </ul>
+									
+
+								</td>
+								<?php }?>
+							<?php }?>
+							</tr>
+						 
+						  <?php }?>
+
+						
+						   
+						  </tbody>
+						</table>
+						<span style="clear: both;"></span>
+						
+						<!-- Tabela fim -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<span style="clear: both;"></span>

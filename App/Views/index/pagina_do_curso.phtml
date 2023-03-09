@@ -1,0 +1,214 @@
+
+
+          
+            <article class="row d-flex justify-content-center main-card"> <!-- Artigos Cursos Inicio -->
+             
+              <div id="postCurso" class="col-9 bg-white  rounded shadow"> <!-- Curso Administracao inicio -->
+
+                <div class="jumbotron mt-5">
+                <h1 class="display-4 d-flex justify-content-center">
+                  <?= $this->view->getCurso['titulo']?>
+                </h1>
+                <div class="d-flex justify-content-center">
+                   <img class="img-fluid h-25" src="arquivos/<?=$this->view->getCurso['capa']?>">
+                </div>
+               
+                
+                <hr class="my-4">
+                <p class="lead">
+                <?= $this->view->getCurso['descricao']?>
+                </p>
+                </div>
+                <div class="d-flex justify-content-end">
+
+                  <a href=""> <!-- Pubs -->
+                   <i class="h1 mr-3 bi bi-window-fullscreen"></i>
+                  </a>
+
+                  <a onclick="$('#cursoForm<?= $this->view->getCurso['id'] ?>').submit()"> <!-- Files -->
+                    <i class="mr-3 h1 bi bi-file-earmark-arrow-down-fill"></i>
+                  </a>
+
+                  <form action="cursoArquivos?offset=0&qtdPg=6" method="post" id="cursoForm<?= $this->view->getCurso['id'] ?>">
+                    <input type="hidden" name="curso_id" value="<?= $this->view->getCurso['id'] ?>">
+                    <input type="hidden" name="usuario_id" value="<?= $this->view->getCurso['usuario_id'] ?>">
+                  </form>
+
+                  <a onclick="$('#galeriaForm').submit()"> <!-- Galeria -->
+                      <i class="h1 bi bi-images"></i>
+                  </a>
+                  <form action="cursoGaleria?offset=0&qtdPg=6" method="post" id="galeriaForm">
+                    <input type="hidden" name="curso_id" value="<?=  $this->view->getCurso['id'] ?>">
+                    <input type="hidden" name="usuario_id" value="<?= $this->view->getCurso['usuario_id'] ?>">
+                  </form>
+
+                </div>
+                </div> <!-- Curso Administracao fim -->
+
+             
+                  
+                <?php if(isset($_SESSION['tipo'])){?>
+                <?php if($this->view->getCurso['usuario_id'] == $_SESSION['id'] || $_SESSION['tipo'] == 'Administrador'){?>
+                <div class="col-9 bg-white rounded mt-5"> <!-- Form inicio -->
+                  <!-- Postagem Inicio-->
+                  <div class="col-12">
+                  <div class="d-flex justify-content-end">
+                    <a onclick="$('#pubForm').submit()">
+                   
+                     <?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){?>
+                        <i class="h1 bi bi-pencil-square"></i>
+                     <?php } else {?>
+                        <i class="h1 bi bi-plus-square"></i>
+                     <?php }?>
+                    </a> 
+                  </div>
+                  </div>
+
+                  <!-- Postagem Fim-->
+                  <form enctype="multipart/form-data" action="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){ echo "alterarPublicacao"; }else{ echo "inserirPublicacao?offset=0&qtdPg=5";}?>" 
+
+                   method="post" id="pubForm" class="mt-2">
+                   
+                    <div class="form-group">
+                      <label>Titulo</label>
+                      <input value="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){echo $this->view->getPubById['titulo'];}?>" class="form-control" type="text" name="titulo">
+                    </div>
+                    <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea  class="form-control" name="descricao"><?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){echo $this->view->getPubById['descricao'];}?></textarea>
+                    </div>
+
+                    <div class="form-group">
+                    
+                    <label  for="arquivoImg">
+                      <i id="arquivoImg1" class="text-danger h1 bi bi-card-image"></i>
+                    </label>
+                    <input id="arquivoImg" class="d-none" type="file" name="imagem">
+
+                    <script type="text/javascript">
+                      $('#arquivoImg').on('change',()=>{
+                        $('#arquivoImg1').removeClass('text-danger');
+                        $('#arquivoImg1').addClass('text-success');
+                      })
+                    </script>
+                    </div>
+
+                    <input type="hidden" name="usuario_id" value="<?= $_SESSION['id']?>">
+                    <input type="hidden" name="curso_id" value="<?= $this->view->getCurso['id'] ?>">
+                    <input type="hidden" name="id" value="<?php if(isset($_GET['metodo']) && $_GET['metodo'] == 'Alterar'){echo $this->view->getPubById['id'];} else { echo " ";}?>">
+                  </form>
+                </div> <!-- Form fim -->
+              <?php }?>
+              <?php }?>
+  
+                <div class="col-9 bg-white  rounded shadow mt-5"> <!-- Curso Administracao Postagem inicio -->
+                
+                <?php foreach ($this->view->getPubs['regs'] as $key => $getPubs) {?>
+              
+                  <div id="#section<?= $getPubs['id']?>" class="card text-center mb-4 shadow">
+                  <div class="card-header">
+                    <?= $getPubs['titulo']?>
+                    <?php if(isset($_SESSION['tipo'])){?>
+                    <?php if($this->view->getCurso['usuario_id'] == $_SESSION['id'] || $_SESSION['tipo'] == 'Administrador'){?>
+                    <div class="d-flex justify-content-end">
+                      
+                      <a href="/paginaCurso?offset=0&qtdPg=5&metodo=Alterar&id=<?=$getPubs['id']?>"> <!-- Alter -->
+                          <i class="h5 bi bi-pencil-square"></i>
+                      </a>
+
+                        <a href="excluirPublicacao?id=<?=$getPubs['id']?>"> <!-- Delete -->
+                         <i class="h5 ml-2 text-danger bi bi-trash3-fill"></i> 
+                      </a>
+                     
+                    </div>
+                    <?php }?>
+                    <?php }?>
+                  </div>
+                  <div class="card-body">
+                    <?php if($getPubs['imagem'] != ''){?>
+                    <div class="row">
+                      <div class="col-lg-6"> <!-- Col 1° -->
+                      <p class="card-text">
+                      <?= $getPubs['descricao']?>
+                      </p>
+                      </div>
+                      
+                      <div class="col-lg-6">
+                        <img class="img-fluid" src="arquivos/<?=$getPubs['imagem']?>">
+                      </div>
+                     
+                    </div>
+                    <?php } else {?>
+                     <p class="card-text">
+                      <?= $getPubs['descricao']?>
+                     </p>
+                    <?php }?>
+                   
+                  </div>
+                  <div class="card-footer text-muted">
+                   <?= $getPubs['data_inclusao']?>
+                  </div>
+                  </div>
+                
+                <?php }?>
+
+
+              <ul class="pagination d-flex justify-content-center">
+              
+              <?php 
+                $qtdPg = 5;
+                $pages = $this->view->getPubs['qt']/$qtdPg;
+                $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+                $atual = ($offset/$qtdPg);
+                $min = 0;
+                $max = $pages;
+
+
+                if($atual > 5 && $pages > 10)
+                {
+                  $min = $atual - 5;
+                }
+
+              ?>
+
+
+                <li class="page-item">
+                  <a class="page-link" href="<?php echo $offset == 0 ?  "#!" : "?offset=".(($atual-1)*$qtdPg)."&qtdPg=".$qtdPg;?>" aria-label="Previous" > 
+                    
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+
+                </li>
+                
+
+                <?php 
+           
+                for ($i=$min; $i < $max; $i++) { ?>
+                 
+                 <li class="page-item"><a class="page-link" href="?offset=<?= ($i*$qtdPg)?>&qtdPg=<?=$qtdPg?>"><?=($i+1)?></a></li>
+                              
+                 <?php } ?>                
+              
+                
+                <li class="page-item">
+                  <a class="page-link" href="<?php echo $atual > $max ? "#!" : "?offset=".(($atual+1)*$qtdPg)."&qtdPg=".$qtdPg;?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+
+
+              </ul>
+
+              </div> <!-- Curso Administracao  fim -->
+
+            
+
+             
+
+          </article> <!-- Artigos Cursos Fim -->
+
+
+    
+

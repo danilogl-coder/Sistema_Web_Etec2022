@@ -1,0 +1,440 @@
+/*<!-- Tudo Inicio -->*/
+*
+{
+
+}
+
+body
+{
+   
+   background: rgba(181, 181, 181, 1.0) url(../img/background.png) no-repeat;
+   background-position: center -70px;
+
+   background-attachment: fixed;
+
+   
+}
+
+/*<-----------------Media Query Incio--------------->*/
+
+/*Small devices (tablets, 768px and up)*/
+@media (min-width: 0px) 
+{
+    .course_button
+    {
+        font-size: 8px;
+    }
+     .list-group 
+    {
+        list-style-type: none;
+        text-decoration: none;
+    }
+
+    h1
+    {
+        font-size: 20px;
+    }
+
+    .adm_buttons
+    {
+        width: 90px;
+        font-size: 7px;
+    }
+
+}
+
+@media (min-width: 576px) 
+{
+    .course_button
+    {
+        font-size: 10px;
+    }
+     .list-group 
+    {
+        list-style-type: none;
+        text-decoration: none;
+    }
+
+    h1
+    {
+        font-size: 25px;
+    }
+        .adm_buttons
+    {
+        width: 110px;
+        font-size: 10px;
+    }
+}
+
+/*Medium devices (tablets, 768px and up)*/ 
+@media (min-width: 768px) 
+{
+    .course_button
+    {
+        font-size: 13px;
+    }
+     .list-group 
+    {
+        list-style-type: none;
+        text-decoration: none;
+    }
+
+    h1
+    {
+        font-size: 30px;
+    }
+      .adm_buttons
+    {
+        width: 120px;
+        font-size: 11px;
+    }
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) 
+{ 
+    .course_button
+    {
+        font-size: 16px;
+    }
+     .list-group 
+    {
+        list-style-type: none;
+        text-decoration: none;
+    }
+
+    h1
+    {
+        font-size: 35px;
+    }
+
+     .adm_buttons
+    {
+        width: 140px;
+        font-size: 13px;
+    }
+
+
+}
+
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) 
+
+{
+    .course_button
+    {
+        font-size: 18px;
+        
+
+    }
+    .list-group 
+    {
+        list-style-type: none;
+        text-decoration: none;
+    }
+
+    h1
+    {
+        font-size: 40px;
+    }
+
+    .adm_buttons
+    {
+        width: 180px;
+        font-size: 16px;
+    }
+   
+}
+
+
+/*<-----------------Media Query Fim ---------------->*/
+
+
+/*<!-- Tudo Fim -->*/
+
+
+/*<!---- Navbar Inicio ---->*/
+.logo 
+{
+   width: 150px;
+}
+
+/*<------ Navbar Links  Inicio ---->*/
+.navbar-dark .navbar-nav .nav-link 
+{
+    color:white;
+}
+
+.navbar-dark .navbar-nav li:hover 
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+/*<------ Navbar Links Fim ---->*/
+
+
+/*<!--- Seleção do navegado inicio -------------------->*/
+
+.navbar-dark .navbar-nav #Home
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+.navbar-dark .navbar-nav #Historia
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+.navbar-dark .navbar-nav #Cursos
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+.navbar-dark .navbar-nav #Vestibulinho
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+.navbar-dark .navbar-nav #Estrutura
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+.navbar-dark .navbar-nav #Estagio
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+.navbar-dark .navbar-nav #Contato
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+
+.navbar-dark .navbar-nav #Area_do_aluno
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+.navbar-dark .navbar-nav #Login
+{
+    background-color: rgba(90, 90, 90, 0.5);
+    border-radius: 5px;
+}
+
+
+/*<!-- Seleção do navegador fim ---------------------------->*/
+
+
+/*<!---- Navbar Fim ---->*/
+
+
+
+/*<!----- Container Principal inicio ----->*/
+
+.main-container
+{
+   margin-top: 350px;
+   background: white;
+}
+
+/*<!------ Cards Inicio ------->*/
+.background-color-main
+{
+   background: rgba(242, 242, 242, 1.0);
+}
+.card-title 
+{
+
+}
+
+
+.main-card 
+{
+   border: none;
+   position: relative;
+   top: -80px;
+
+}
+
+.main-card-header1
+{
+   border-top: 10px solid rgba(203, 27, 62, 1.0);
+   border-right: 1px solid darkred;
+   background: rgba(228, 73, 89, 1.0);
+}
+
+.main-card-header1:hover
+{
+   border-top: 10px solid rgba(180, 27, 62, 1.0);
+   background: rgba(200, 73, 89, 1.0);
+}
+
+.main-card-header2
+{
+   border-top: 10px solid rgba(203, 27, 62, 1.0);
+   border-right: none;
+   background: rgba(228, 73, 89, 1.0);
+}
+
+.main-card-header2:hover
+{
+   border-top: 10px solid rgba(180, 27, 62, 1.0);
+   background: rgba(200, 73, 89, 1.0);
+}
+
+
+/*<!------ Cards Fim ------->*/
+
+
+
+/*Container Article inicio*/
+
+
+
+/*Container Article fim*/
+
+/*<!----- Container Principal fim ----->*/
+
+
+
+
+
+
+
+
+/*<!----- Pagina cursos inicio ------------------->*/
+
+/*<!-- Container principal inicio -->*/
+.main-secao
+{
+    height: 520px;
+}
+
+.card-curso
+{
+    height: 250px;
+}
+
+/*<!-- Container principal fim -->*/
+
+/*<!----- Pagina cursos fim ---------------------->*/
+
+
+
+
+
+
+/*<!----- Pagina login inicio ------------------->*/
+
+/*<!-- Container principal inicio -->*/
+.container-login
+{
+    height: 600px;
+}
+
+.card-main-login
+{
+    width: 600px;
+    border-top: 10px solid #dc3545;
+    position: relative;
+    top: -50px;
+
+}
+
+.button-login
+{
+    position:relative;
+    top: -50px;
+
+}
+
+#login-titulo 
+{
+    
+}
+
+.form-login
+{
+  
+
+}
+
+/*<!-- Container login fim -->*/
+
+/*<!----- Pagina cursos fim ---------------------->*/
+
+
+
+/*<--------------AreaAdm Inicio --------------------------->*/
+
+.main-areaAdm-container
+{
+   margin-top: 80px;
+   background: white;
+}
+
+.img-adm 
+{
+ height: 300px;
+}
+
+/*<--------------AreaAdm Fim------------------------------->*/
+
+
+/*<------------------ Area-Coordenador Inicio -------------->*/
+
+.usuarioArea-Main
+{
+    height: 72vh;
+    
+}
+
+.coordenadorMenuColor
+{
+    background:rgba(230, 230, 230, 1.0);
+    
+    
+   
+    
+}
+
+.usuario-row1
+{
+ position: relative;
+ margin-top: -150px;
+ 
+}
+
+.usuario-row2
+{
+ position: relative;
+ margin-top: -150px;
+ 
+}
+
+.coordenadorHeight
+{
+    height: 70vh;
+    overflow-y: auto;
+}
+
+/*<------------------ Area-Coordenador Fim ----------------->*/
+
+/*<------------- Descricao curso adm inicio ---------------->*/
+.descricao_card
+{
+    height: 100px;
+    overflow-y: auto;
+}
+
+/*<------------- Descricao curso adm Fim ---------------->*/
